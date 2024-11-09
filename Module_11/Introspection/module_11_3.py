@@ -29,9 +29,9 @@ def introspection_info(obj):
     attributes = []
     methods = []
     for attr_name in dir(obj):
-        attributes.append(attr_name)
+        if not callable(getattr(obj, attr_name)):
+            attributes.append(attr_name)
         if callable(getattr(obj, attr_name)):
-            # print(f' is callable! {attr_name}')
             methods.append(attr_name)
     result['attributes'] = attributes
     result['methods'] = methods
